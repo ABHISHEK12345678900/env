@@ -1,0 +1,27 @@
+{% extends '../base.html' %}
+{% block content %}
+
+    <div class="container mt-4">
+        <h2 class="text-center text-secondary">Update Receipe</h2>
+        <form action="" method="POST" class="p-4 m-3 col-6 mx-auto text-light shadow-lg bg-primary rounded" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="" class="form-label">Receipe Name</label>
+                <input type="text" class="form-control" id="" value="{{receipe.receipe_name}}" placeholder="receipe_name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Receipe Description</label>
+                <textarea class="form-control" id="" value="" name="desc" required>{{receipe.receipe_desc}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" value="" id="formFile" name="file">
+            </div>
+            <div>
+                <button class="btn btn-danger w-100" type="submit">Update Receipe</button>
+            </div>
+        </form>      
+
+    </div>
+
+{% endblock %}
