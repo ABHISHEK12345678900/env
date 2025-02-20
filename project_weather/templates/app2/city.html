@@ -18,6 +18,7 @@
             <th scope="col">Description</th>
             <th scope="col">sunrise</th>
             <th scope="col">sunset</th>
+            <th scope="col">lat & long</th>
             <th scope="col">Image</th>
           </tr>
         </thead>
@@ -29,11 +30,15 @@
                 <td>{{desc}}</td>
                 <td>{{sunrise}}</td>
                 <td>{{sunset}}</td>
+                <td>{{latitude}}-{{longitude}}</td>
                 <td>
                     <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="{{desc}}" style="height: 50px; width: 50px;">
                 </td>
             </tr>
         </tbody>
     </table>  
+    <div>
+        {{map|safe}}
+    </div>
 
 {% endblock %}

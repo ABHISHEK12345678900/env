@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from datetime import datetime, date, timedelta
 import requests
 from .models import CityModel, WeatherModel
 from astral import LocationInfo 
 from astral.sun import sun
 from geopy.geocoders import Nominatim
+import folium
 
 
 # Create your views here.
@@ -18,7 +20,7 @@ def index(request):
     if request.method == 'POST':
         city = request.POST.get('city')
 
-        sunrise, sunset = get_sun_times(city)
+        sunrise, sunset , latitude, longitude= get_sun_times(city)
 
         params = {'q': city, 'appid': appid, 'units': 'metric'}
         r = requests.get(url=URL1, params=params)
@@ -34,6 +36,15 @@ def index(request):
         icon = resp['weather'][0]['icon']
         temp = resp['main']['temp']
 
+        m = folium.Map(location=[latitude, longitude], zoom_start=12)
+        # Add a marker (pointer) for the city
+        folium.Marker(
+            [latitude, longitude],
+            popup=f"{city}",
+            tooltip="Click for more info"
+        ).add_to(m)
+        map_html = m._repr_html_()
+
         context = {
             'date': dt,
             'page': page,
@@ -43,7 +54,10 @@ def index(request):
             'icon': icon,
             'temp': temp,
             'sunrise': sunrise,
-            'sunset': sunset
+            'sunset': sunset,
+            'latitude': latitude,
+            'longitude': longitude,
+            'map': map_html,
         }
 
         WeatherModel.objects.create(date= dt, city= city, temp= temp, desc= description, sun_rise= sunrise.strftime('%Y-%m-%d %H:%M'), sun_set= sunset.strftime('%Y-%m-%d %H:%M'))
@@ -54,7 +68,7 @@ def index(request):
 
         return render(request, 'app2/city.html')
     
-def weather_data(request):
+def load_city_map(request):
     pass
 
 
@@ -77,4 +91,4 @@ def get_sun_times(city_name):
     sunrise = sun_info['sunrise'] + timedelta(hours=5, minutes=30)
     sunset = sun_info['sunset'] + timedelta(hours=5, minutes=30)
     
-    return sunrise, sunset
+    return sunrise, sunset, latitude, longitude
