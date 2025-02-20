@@ -12,17 +12,23 @@
     <table class="table table-dark">
         <thead>
           <tr>
+            <th scope="col">date</th>
             <th scope="col">city</th>
             <th scope="col">temperature</th>
             <th scope="col">Description</th>
+            <th scope="col">sunrise</th>
+            <th scope="col">sunset</th>
             <th scope="col">Image</th>
           </tr>
         </thead>
         <tbody>
             <tr>
-                <th scope="row">{{city}}</th>
+                <th scope="row">{{date}}</th>
+                <th>{{city}}</th>
                 <td>{{temp}}</td>
                 <td>{{desc}}</td>
+                <td>{{sunrise}}</td>
+                <td>{{sunset}}</td>
                 <td>
                     <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="{{desc}}" style="height: 50px; width: 50px;">
                 </td>
