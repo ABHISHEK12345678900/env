@@ -11,7 +11,7 @@ from geopy.geocoders import Nominatim
 def index(request):
     dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     page = 'Add_and_check_City_stats'
-    appid = 'c551cdbebc5f82e27cea98c4a2012026'
+    appid = ''
     URL1 = 'https://api.openweathermap.org/data/2.5/weather'
     
     
