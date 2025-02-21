@@ -13,7 +13,7 @@ import folium
 def index(request):
     dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     page = 'Add_and_check_City_stats'
-    appid = 'c551cdbebc5f82e27cea98c4a2012026'
+    appid = ''
     URL1 = 'https://api.openweathermap.org/data/2.5/weather'
     
     
@@ -91,4 +91,4 @@ def get_sun_times(city_name):
     sunrise = sun_info['sunrise'] + timedelta(hours=5, minutes=30)
     sunset = sun_info['sunset'] + timedelta(hours=5, minutes=30)
     
-    return sunrise, sunset, latitude, longitude
+    return sunrise, sunset
